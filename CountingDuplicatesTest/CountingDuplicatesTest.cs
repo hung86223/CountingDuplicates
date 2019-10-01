@@ -11,7 +11,7 @@ namespace CountingDuplicatesTest
         {
             var stringService = new StringService();
 
-            var charCounting = stringService.CharCounting("question");
+            var charCounting = stringService.CountDuplicateChar("abcde");
 
             Assert.AreEqual(0, charCounting);
         }
@@ -19,9 +19,21 @@ namespace CountingDuplicatesTest
 
     public class StringService
     {
-        public int CharCounting(string question)
+        public int CountDuplicateChar(string question)
         {
-            throw new NotImplementedException();
+            int duplicateCharCount = 0;
+            for (int i = 0; i < question.Length; i++)
+            {
+                for (int j = i + 1; j < question.Length; j++)
+                {
+                    if (question[j].Equals(question[i]))
+                    {
+                        duplicateCharCount++;
+                    }
+                }
+            }
+
+            return duplicateCharCount;
         }
     }
 }
