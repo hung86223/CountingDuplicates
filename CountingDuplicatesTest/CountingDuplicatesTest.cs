@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CountingDuplicatesTest
@@ -15,25 +16,56 @@ namespace CountingDuplicatesTest
 
             Assert.AreEqual(0, charCounting);
         }
+
+        [TestMethod]
+        public void TwoCharactersRepeat()
+        {
+            var stringService = new StringService();
+
+            var charCounting = stringService.CountDuplicateChar("aabbcde");
+
+            Assert.AreEqual(2, charCounting);
+        }
+
+        [TestMethod]
+        public void ManySameCharactersRepeat()
+        {
+            var stringService = new StringService();
+
+            var charCounting = stringService.CountDuplicateChar("indivisibilities");
+
+            Assert.AreEqual(2, charCounting);
+        }
+
+        [TestMethod]
+        public void StringIncludeUpperCharacters()
+        {
+            var stringService = new StringService();
+
+            var charCounting = stringService.CountDuplicateChar("Indiviibilities");
+
+            Assert.AreEqual(1, charCounting);
+        }
     }
 
     public class StringService
     {
         public int CountDuplicateChar(string question)
         {
-            int duplicateCharCount = 0;
-            for (int i = 0; i < question.Length; i++)
+            var duplicateChars = new List<char>();
+            var lowerStr = question.ToLower();
+            for (int i = 0; i < lowerStr.Length; i++)
             {
-                for (int j = i + 1; j < question.Length; j++)
+                for (int j = i + 1; j < lowerStr.Length; j++)
                 {
-                    if (question[j].Equals(question[i]))
+                    if (lowerStr[j].Equals(lowerStr[i]) && !duplicateChars.Contains(lowerStr[j]))
                     {
-                        duplicateCharCount++;
+                        duplicateChars.Add(lowerStr[j]);
                     }
                 }
             }
 
-            return duplicateCharCount;
+            return duplicateChars.Count;
         }
     }
 }
