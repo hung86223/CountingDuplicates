@@ -41,7 +41,7 @@ namespace CountingDuplicatesTest
         {
             var stringService = new StringService();
 
-            var charCounting = stringService.CountDuplicateChar("Indiviibilities");
+            var charCounting = stringService.CountDuplicateChar("IndIviibilities");
 
             Assert.AreEqual(1, charCounting);
         }

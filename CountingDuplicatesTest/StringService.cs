@@ -7,7 +7,7 @@ namespace CountingDuplicatesTest
     {
         public int CountDuplicateChar(string question)
         {
-            return question.GroupBy(c => c).Count(g => g.Count<char>() > 1);
+            return question.ToLower().GroupBy(c => c).Count(g => g.Count<char>() > 1);
         }
     }
 }
